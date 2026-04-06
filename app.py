@@ -45,8 +45,11 @@ def fmt_usd(value: float) -> str:
 def fmt_balance(balance: float) -> str:
     return f"{balance:,.4f}"
 
-# ─────────────────────────────────────── API key (env only)
-api_key: str = os.getenv("HELIUS_API_KEY", "").strip()
+# ─────────────────────────────────────── API key (env or Streamlit secrets)
+api_key: str = (
+    st.secrets.get("HELIUS_API_KEY")
+    or os.getenv("HELIUS_API_KEY", "")
+).strip()
 
 # ─────────────────────────────────────── sidebar
 with st.sidebar:
@@ -81,7 +84,7 @@ st.markdown("Look up **SOL and SPL token balances** for any wallet on any histor
 
 if not api_key:
     st.warning(
-        "No Helius API key found. Add `HELIUS_API_KEY=your_key` to a `.env` file and restart.",
+        "No Helius API key found. Add `HELIUS_API_KEY` to your `.env` file (local) or Streamlit app secrets (deployed).",
         icon="🔑",
     )
     st.stop()
