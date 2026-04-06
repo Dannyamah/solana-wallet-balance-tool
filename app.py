@@ -69,13 +69,16 @@ with st.sidebar:
     st.markdown("---")
     st.markdown(
         "**How it works**\n\n"
-        "Transaction history is scanned backwards to find the wallet state "
-        "at the end of the selected date. Each token account is checked the same way.\n\n"
-        "**Prices** are fetched live from DexScreener — they reflect current "
-        "market rates, not rates on the historical date.\n\n"
+        "Enter a wallet address and pick a date. The app scans the wallet's "
+        "transaction history to reconstruct its SOL and SPL token balances "
+        "at the end of that day (23:59:59 UTC).\n\n"
+        "For today's date, live prices are used. For past dates, "
+        "end-of-day historical prices are applied where available.\n\n"
+        "Tokens worth less than $1 are collapsed into a separate section.\n\n"
         "**Limitations**\n"
-        "- Wallets with many tokens will take longer.\n"
-        "- Archival data older than ~18 months may be unavailable on the free Helius tier."
+        "- Wallets with many tokens or high transaction volume will take longer to load.\n"
+        "- Historical price data may not be available for all tokens.\n"
+        "- Archival transaction data older than ~18 months may be incomplete."
     )
 
 # ─────────────────────────────────────── main header
